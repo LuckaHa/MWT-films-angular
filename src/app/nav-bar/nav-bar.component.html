@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <span><a mat-flat-button color="primary" routerLink="/users" routerLinkActive="mat-accent">Users</a></span>
+    <span><a mat-flat-button color="primary" routerLink="/extended-users" routerLinkActive="mat-accent">Extended Users</a></span>
+    <span class="spacer"></span>
+    <span *ngIf="username; else elseBlock">
+        <button type="button" mat-flat-button color="primary" (click)="logout()">
+            <mat-icon>account_circle</mat-icon><strong>{{username}}</strong> Log Out
+        </button>
+    </span>
+    <ng-template #elseBlock>
+        <a mat-flat-button color="primary" routerLink="/login" routerLinkActive="mat-accent">
+            <mat-icon>account_circle</mat-icon> Log In
+        </a>
+        <a mat-flat-button color="primary" routerLink="/register" routerLinkActive="mat-accent">
+            <mat-icon>account_circle</mat-icon> Register
+        </a>
+    </ng-template>
+</mat-toolbar>

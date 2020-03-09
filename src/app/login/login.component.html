@@ -1,0 +1,29 @@
+<div class="login-wrapper">
+    <form (ngSubmit)="formSubmit()" #formModel="ngForm">
+        <mat-card class="example-card">
+            <mat-card-header>
+            <mat-card-title>LOG IN</mat-card-title>
+            <mat-card-subtitle>Write your name and password</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>         
+                    <input matInput placeholder="Login name" [(ngModel)]="auth.name" name="name" required/><br/>
+                    <mat-hint>Your login name</mat-hint>
+                    <mat-error>Login must be filled</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label> 
+                    <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Password" [(ngModel)]="auth.password" name="pass" required/>
+                    <mat-error>Password must be filled</mat-error>
+                    <button type="button" color="primary" aria-label="Show password" (click)="hidePass = !hidePass">
+                        <mat-icon>{{ hidePass ? "visibility" : "visibility_off" }}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!formModel.form.valid">LOG IN</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

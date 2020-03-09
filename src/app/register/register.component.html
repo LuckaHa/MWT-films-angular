@@ -1,0 +1,54 @@
+<div class="login-wrapper">
+    <form (ngSubmit)="formSubmit()" [formGroup]="registerForm">
+        <mat-card class="example-card">
+            <mat-card-header>
+            <mat-card-title>Register form</mat-card-title>
+            <mat-card-subtitle>Write your name and password</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>         
+                    <input matInput placeholder="Login name" formControlName="name" required/><br/>
+                    <mat-error *ngIf="name?.errors?.minlength">
+                        Login must contain {{name.errors.minlength.requiredLength}} characters at minimum. 
+                        Now you have {{name.errors.minlength.actualLength}} characters.</mat-error>
+                    <mat-error *ngIf="name?.errors?.required">Login must be filled</mat-error>
+                    <mat-error *ngIf="name?.errors?.conflictField">{{name.errors.conflictField}}</mat-error>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <mat-label>E-mail</mat-label>         
+                    <input matInput placeholder="E-mail" formControlName="email" required/><br/>
+                    <mat-error *ngIf="email?.errors?.email || email?.errors?.pattern">
+                        Mail must sattisfy the pattern (name)@(service).(end)</mat-error>
+                    <mat-error *ngIf="email?.errors?.required">E-mail must be filled</mat-error>
+                    <mat-error *ngIf="email?.errors?.conflictField">{{email.errors.conflictField}}</mat-error>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <mat-label>Password</mat-label> 
+                    <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Password" 
+                        formControlName="password" required/>
+                    <mat-hint>{{passMessage}}</mat-hint>
+                    <mat-error *ngIf="password?.errors?.weakPassword">{{password.errors.weakPassword}}</mat-error>
+                    <mat-error *ngIf="password?.errors?.required">Password must be filled</mat-error>
+                    <button type="button" color="primary" aria-label="Show password" (click)="hidePass = !hidePass">
+                        <mat-icon>{{ hidePass ? "visibility" : "visibility_off" }}</mat-icon>
+                    </button>
+                </mat-form-field><br>
+                <mat-form-field>
+                    <mat-label>Password</mat-label> 
+                    <input matInput [type]="hidePass ? 'password' : 'text'" placeholder="Repeat password"
+                        formControlName="password2" required/>
+                        <mat-error *ngIf="password2?.errors?.differentPasswords">{{password2.errors.differentPasswords}}</mat-error>
+                        <mat-error *ngIf="password2?.errors?.required">Password must be filled</mat-error>
+                    <button type="button" color="primary" aria-label="Show password" (click)="hidePass = !hidePass">
+                        <mat-icon>{{ hidePass ? "visibility" : "visibility_off" }}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" 
+                    [disabled]="registerForm?.invalid">Register</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>
