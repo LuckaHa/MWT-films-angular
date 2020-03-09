@@ -15,6 +15,7 @@ export class UsersServerService {
   localUsers = [new User("Janka", "janka@gmail.sk"), new User("Danka", "danka@gmail.sk")];
   loggedUserSubscriber: Subscriber<string>;
   url = "http://localhost:8080/";
+  redirectAfterLogin = "/extended-users";
 
   constructor(private http: HttpClient, private snackbarService: SnackbarService) { }
 

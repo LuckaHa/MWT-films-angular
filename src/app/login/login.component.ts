@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     // v auth je presne to, co je aktualne vo formulari, lebo je synchronizovana
     this.usersServerService.login(this.auth).subscribe(
       ok => {
-        this.router.navigateByUrl("/users");
+        this.router.navigateByUrl(this.usersServerService.redirectAfterLogin);
+        this.usersServerService.redirectAfterLogin="/extended-users"
       },
       // ak pride EMPTY, subscribe sa nezavola a teda nenastane presmerovanie na /users
       // v users-services.service.ts sme zaezpecili, ze v pripade akejkolvek chyby pride EMPTY
