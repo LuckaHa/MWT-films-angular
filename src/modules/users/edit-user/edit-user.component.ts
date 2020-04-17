@@ -49,7 +49,7 @@ export class EditUserComponent implements OnInit, CanComponentDeactivate {
   saveUser(user: User) {
     this.usersServerService.saveUser(user).subscribe(
       () => {
-        this.router.navigateByUrl("/extended-users");
+        this.router.navigateByUrl("/users/extended");
         this.userSaved = true;
       })
   }

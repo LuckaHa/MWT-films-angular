@@ -10,14 +10,18 @@ import { Group } from 'src/entities/group';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UsersServerService {
   
   localUsers = [new User("Janka", "janka@gmail.sk"), new User("Danka", "danka@gmail.sk")];
   loggedUserSubscriber: Subscriber<string>;
   url = "http://localhost:8080/";
-  redirectAfterLogin = "/extended-users";
+  redirectAfterLogin = "/users/extended";
 
-  constructor(private http: HttpClient, private snackbarService: SnackbarService) { }
+  constructor(
+    private http: HttpClient, 
+    private snackbarService: SnackbarService
+  ) {}
 
   //private token: string = null; // uz budeme token ziskavat z lok. uloziska
   get token(): string {

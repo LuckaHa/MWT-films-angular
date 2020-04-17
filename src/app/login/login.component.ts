@@ -13,11 +13,12 @@ export class LoginComponent implements OnInit {
   auth: Auth = new Auth("Peter");
   hidePass: boolean = true;
 
-  constructor(private usersServerService: UsersServerService, // pristup k servisu cez instruktor
-    private router: Router) { }
+  constructor(
+    private usersServerService: UsersServerService, // pristup k servisu cez instruktor
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   get getAuth(): string {
     return JSON.stringify(this.auth);
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.usersServerService.login(this.auth).subscribe(
       ok => {
         this.router.navigateByUrl(this.usersServerService.redirectAfterLogin);
-        this.usersServerService.redirectAfterLogin="/extended-users"
+        this.usersServerService.redirectAfterLogin="/users/extended"
       },
       // ak pride EMPTY, subscribe sa nezavola a teda nenastane presmerovanie na /users
       // v users-services.service.ts sme zaezpecili, ze v pripade akejkolvek chyby pride EMPTY

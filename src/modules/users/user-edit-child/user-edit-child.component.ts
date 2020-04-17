@@ -15,7 +15,7 @@ import { Group } from 'src/entities/group';
 export class UserEditChildComponent implements OnChanges {
   @Input() user: User; // toto je [user] v html
   // na zaciatku je undefined, az po OnInit v edit-user je nastaveny --> odchytime zmenu user: OnChanges()
-  @Output() changedUser = new EventEmitter<User>();
+  @Output() changedUser = new EventEmitter<User>(); // emiter posle rodicovi info, ze sa zmenil user
   groups: Group[];
   hidePass: boolean = true;
   userEditForm = new FormGroup({
@@ -126,7 +126,7 @@ export class UserEditChildComponent implements OnChanges {
       undefined /* last login */,
       this.password.value.trim() ? this.password.value.trim() : null, //ak je v hesle nieco napisane, zmenime ho
       this.active.value,
-      this.groups.filter((group, i) => this.groupsCheckboxes.at(i).value)
+      this.groups.filter((group, i) => this.groupsCheckboxes.at(i).value) // dat tam tie groups, ktore ma zaskrtnute
     );
     this.changedUser.next(user);
   }

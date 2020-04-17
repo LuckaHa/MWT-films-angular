@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
-    <span><a mat-flat-button color="primary" routerLink="/users" routerLinkActive="mat-accent">Users</a></span>
-    <span><a mat-flat-button color="primary" routerLink="/extended-users" routerLinkActive="mat-accent">Extended Users</a></span>
+    <span><a mat-flat-button color="primary" routerLink="/users/simple" routerLinkActive="mat-accent">Users</a></span>
+    <span><a mat-flat-button color="primary" routerLink="/users/extended" routerLinkActive="mat-accent">Extended Users</a></span>
+    <span><a mat-flat-button color="primary" routerLink="/films" routerLinkActive="mat-accent">Films</a></span>
     <span class="spacer"></span>
     <span *ngIf="username; else elseBlock">
         <button type="button" mat-flat-button color="primary" (click)="logout()">

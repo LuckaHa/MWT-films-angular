@@ -12,6 +12,7 @@ import { MaterialModule } from './material.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersModule } from 'src/modules/users/users.module';
+import { FilmsModule } from 'src/modules/films/films.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UsersModule } from 'src/modules/users/users.module';
     FormsModule,
     ReactiveFormsModule,
     UsersModule,
+
     AppRoutingModule,
     MaterialModule
   ],
