@@ -58,19 +58,22 @@ class filmsDataSource implements DataSource<Film> {
     this.indexFrom = paginator.pageIndex * paginator.pageSize;
 
     this.futureObservables.next(of(null)) // sposobi nacitanie filmov uz pri pocitaocnom nacitani stranky
+
     this.futureObservables.next(paginator.page.pipe( // nacitanie pri dalsom prekliku
       tap((event: PageEvent) => {
         this.pageSize = event.pageSize;
         this.indexFrom = event.pageIndex * event.pageSize;
       })
     ));
-    this.futureObservables.next(
+
+    this.futureObservables.next( // vyhladavanie
       filter$.pipe(tap(filterString => {
         this.paginator.firstPage(); // na zaciatku vyhladavania sa presun na 1. stranku, aby si hladal od zaciatku
         this.filter = filterString;
       }))
     );
-    this.futureObservables.next(sort.sortChange.pipe(
+
+    this.futureObservables.next(sort.sortChange.pipe( // sortovanie
       tap((sortEvent: Sort) => {
         this.paginator.firstPage();
         this.orderBy;
@@ -79,7 +82,6 @@ class filmsDataSource implements DataSource<Film> {
           this.descending = undefined;
           return;
         }
-
         this.descending = sortEvent.direction === "desc"; // ak je to desc, tak true
         switch(sortEvent.active) {
           case "afi1998": {
@@ -98,7 +100,7 @@ class filmsDataSource implements DataSource<Film> {
     ); // dalsi zdroj udalosti, z ktoreho zistime, akym smerom maju byt polozky usporiadane
   }
 
-  // ciel: ziskat a vratit filmy zakazdym, ked sa zmeni paginator
+  // ciel: ziskat a vratit filmy zakazdym, ked sa zmeni poziadavka (paginator/search/sort)
   connect(): Observable<Film[]> {
     return this.futureObservables.pipe(
       mergeAll(),

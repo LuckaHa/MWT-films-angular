@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: "films", 
     loadChildren: () => import('../modules/films/films.module').then(mod => mod.FilmsModule), // nacita az ked bolo zavolane loadChildren
-    //canLoad: [AuthGuard], // nacita len ak na to ma navstevnik pravo
+    canLoad: [AuthGuard], // nacita len ak na to ma navstevnik pravo
     data: { preloading: false }
   },
   {

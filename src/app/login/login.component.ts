@@ -3,6 +3,9 @@ import { Auth } from 'src/entities/auth';
 import { UsersServerService } from 'src/services/users-services.service';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { Login } from 'src/shared/auth.actions';
+import { AuthState } from "src/shared/auth.state";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private usersServerService: UsersServerService, // pristup k servisu cez instruktor
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit(): void {}
@@ -25,6 +29,14 @@ export class LoginComponent implements OnInit {
   }
 
   formSubmit() {
+    this.store.dispatch(new Login(this.auth)) // vyrobenie udalosti a odoslanie do uloziska
+      .subscribe(() => {
+        console.log("Login spracovany.");
+        this.router.navigateByUrl(this.store.selectSnapshot(AuthState.redirectUrl));
+      }
+    ); 
+
+    /** 
     // v auth je presne to, co je aktualne vo formulari, lebo je synchronizovana
     this.usersServerService.login(this.auth).subscribe(
       ok => {
@@ -37,5 +49,6 @@ export class LoginComponent implements OnInit {
         console.log("Error: " + JSON.stringify(error));
       }
     );
+    */
   }
 }
